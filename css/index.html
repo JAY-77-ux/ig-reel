@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stories & Reels</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,800;1,200&family=Noto+Sans:wght@200;400;900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <!-- Add to Story Button -->
+    <div class="add-story-button">
+        <button onclick="addStory()">+ Add to Story</button>
+    </div>
+
+    <!-- STORIES MENU -->
+    <ul class="stories-menu">
+        <li class="story new">
+            <div class="img-wrapper">
+                <img class="img" alt="profile-pic" src="image/insta.jpeg"/>
+            </div>
+            <p>JAY</p>
+        </li>
+        <li class="story viewed live">
+            <div class="img-wrapper">
+                <img class="img" alt="profile-pic" src="image/pngtree-colorful-gradient-pattern-cover-letter-for-galaxy-g7-2017-picture-image_3127858.jpg"/>
+            </div>
+            <p>tirth</p>
+        </li>
+        <li class="story new">
+            <div class="img-wrapper">
+                <img class="img" alt="profile-pic" src="image/story.jpg"/>
+            </div>
+            <p>AMAN</p>
+        </li>
+    </ul>
+
+    <!-- REELS CARDS -->
+    <div class="cards-container">
+
+        <!-- Reel 1 -->
+        <div class="card" data-audio="audio/song1.mp3">
+            <div class="card-thumbnail">
+                <div class="thumbnail-container">
+                    <img src="image/HANUMANJI.jpg" alt="Hanuman Image">
+                    <ul class="interaction-panel">
+                        <li onclick="likeReel(this)">❤ <span class="count">1M</span></li>
+                        <li onclick="commentReel()">💬 <span class="count">10K</span></li>
+                        <li onclick="shareReel()">➤ <span class="count">30K</span></li>
+                        <li>⋮</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-avatar">
+                    <img src="image/HANUMANJI.jpg" alt="Avatar">
+                </div>
+                <div class="card-details">
+                    <h3>JAY HANUMANJI DADA</h3>
+                    <p>By....</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reel 2 -->
+        <div class="card" data-audio="audio/song2.mp3">
+            <div class="card-thumbnail">
+                <div class="thumbnail-container">
+                    <img src="image/WhatsApp Image 2025-05-14 at 11.24.01_35498f1e.jpg" alt="Ram Image">
+                    <ul class="interaction-panel">
+                        <li onclick="likeReel(this)">❤ <span class="count">1M</span></li>
+                        <li onclick="commentReel()">💬 <span class="count">10K</span></li>
+                        <li onclick="shareReel()">➤ <span class="count">30K</span></li>
+                        <li>⋮</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-avatar">
+                    <img src="image/WhatsApp Image 2025-05-14 at 11.24.01_35498f1e.jpg" alt="Avatar">
+                </div>
+                <div class="card-details">
+                    <h3>JAY SHREE RAM</h3>
+                    <p>BY.....</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="reel-audio" src="" autoplay loop></audio>
+</div>
+
+<!-- JS -->
+<script>
+    const audio = document.getElementById('reel-audio');
+    const cards = document.querySelectorAll('.card');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const newAudio = entry.target.getAttribute('data-audio');
+                if (audio.src !== location.href + newAudio) {
+                    audio.src = newAudio;
+                    audio.play().catch(() => {
+                        console.log('Autoplay blocked');
+                    });
+                }
+            }
+        });
+    }, {
+        threshold: 0.75
+    });
+
+    cards.forEach(card => observer.observe(card));
+
+    function addStory() {
+        alert('Feature to add a story coming soon!');
+    }
+
+    function likeReel(el) {
+        const countSpan = el.querySelector('.count');
+        let count = parseInt(countSpan.textContent.replace(/[^\d]/g, '')) || 0;
+        count++;
+        countSpan.textContent = `${count}`;
+    }
+
+    function commentReel() {
+        alert("Comment feature coming soon!");
+    }
+
+    function shareReel() {
+        alert("Shared successfully!");
+    }
+</script>
+
+</body>
+</html>
